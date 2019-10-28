@@ -4,6 +4,6 @@ image:
   pullPolicy: IfNotPresent
 service:
   name: appnode
-  type: NodeIP
+  type: NodePort
   externalPort: 3000
   internalPort: 3000
