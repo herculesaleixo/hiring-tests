@@ -4,6 +4,6 @@ image:
   pullPolicy: IfNotPresent
 service:
   name: appnode
-  type: NodePort
+  type: ClusterIP
   externalPort: 3000
   internalPort: 3000
