@@ -1,0 +1,9 @@
+image:
+  repository: appnode
+  tag: latest
+  pullPolicy: IfNotPresent
+service:
+  name: appnode
+  type: NodeIP
+  externalPort: 3000
+  internalPort: 3000

@@ -9,6 +9,7 @@
   "author": "Wilton Felix",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-healthcheck": "^0.1.0"
   }
 }

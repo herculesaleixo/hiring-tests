@@ -1,0 +1,34 @@
+stages:
+  - build
+#  - test
+#  - publish
+  - deploy
+
+build:
+  stage: build
+  before_script:
+    - if [ -z `command -v docker` ]; then echo install docker on gitlab runner; else docker ps; fi
+  script:
+    - docker build -t appnode .
+  only:
+    - develop
+
+#publish_to_intenal_registry:
+#  stage: publish
+#  before_script:
+#    - docker login ...
+#  script:
+#    - docker tag appnode ../appnode
+#    - docker push ../appnode
+#  only:
+#    - develop
+
+deploy:
+  stage: deploy
+#  before_script:
+#    - docker login ...
+#    - docker pull .../appnode
+  script:
+    - helm install appnode
+  only:
+    - develop
