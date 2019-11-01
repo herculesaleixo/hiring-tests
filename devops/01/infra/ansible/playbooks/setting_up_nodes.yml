@@ -1,0 +1,76 @@
+---
+- hosts: all
+  vars_files:
+  - env_variables
+  tasks:
+  - name: Creating a repository file for Kubernetes...
+    become: yes
+    file:
+      path: /etc/apt/sources.list.d/kubernetes.list
+      state: touch
+  
+  - name: Creating a repository file for Docker...
+    become: yes
+    file:
+      path: /etc/apt/sources.list.d/docker.list
+      state: touch
+
+  - name: Add an apt-key for kubeadm...
+    become: yes
+    apt_key:
+      url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+      state: present
+  
+  - name: Add an apt-key for docker...
+    become: yes
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+  
+  - name: Adding repository details in Kubernetes repo file...
+    become: yes
+    blockinfile:
+     path: /etc/apt/sources.list.d/kubernetes.list
+     block: |
+       deb https://apt.kubernetes.io/ kubernetes-xenial main
+
+  - name: Adding repository details in docker repo file...
+    become: yes
+    blockinfile:
+     path: /etc/apt/sources.list.d/docker.list
+     block: |
+       deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
+
+  - name: Installing required packages...
+    become: yes
+    apt:
+     name: "{{ item }}"
+     state: present
+     update_cache: yes
+    with_items: "{{ packages }}"
+
+  - name: Setup daemon docker - write file...
+    become: yes
+    shell: | 
+      cat > /etc/docker/daemon.json <<EOF
+      {
+        "exec-opts": ["native.cgroupdriver=systemd"],
+        "log-driver": "json-file",
+        "log-opts": {
+          "max-size": "100m"
+        },
+        "storage-driver": "overlay2"
+      }
+      EOF
+
+  - name: Create docker service dir...
+    become: yes
+    shell: "mkdir -p /etc/systemd/system/docker.service.d"
+
+  - name: Starting and Enabling the required services
+    become: yes
+    service:
+     name: "{{ item }}"
+     state: started
+     enabled: yes
+    with_items: "{{ services }}"

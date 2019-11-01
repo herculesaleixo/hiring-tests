@@ -1,0 +1,12 @@
+---
+- hosts: all
+  vars_files:
+  - env_variables
+  tasks:
+  - name: Installing prerequisites packages...
+    become: yes
+    apt:
+     name: "{{ item }}"
+     state: present
+     update_cache: yes
+    with_items: "{{ prerequisites }}"

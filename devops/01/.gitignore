@@ -1,0 +1,10 @@
+app/node_modules
+infra/terraform/terraform
+infra/terraform/terraform.zip
+infra/terraform/terraform.tfstate
+infra/terraform/terraform.tfstate.backup
+infra/terraform/.terraform
+infra/terraform/k8s-key.pub
+infra/ansible/k8s-key
+infra/ansible/playbooks/join_token
+infra/ansible/playbooks/kubeconfig

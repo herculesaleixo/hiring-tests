@@ -1,0 +1,22 @@
+---
+#Enter the IP Address of the Kubernetes Master node to the ad_addr variable.
+pod_cidr: 172.16.0.0/16
+
+prerequisites:
+- apt-transport-https
+- ca-certificates
+- curl
+- software-properties-common
+
+packages:
+- docker-ce=18.06.2~ce~3-0~ubuntu
+- kubeadm
+- kubectl
+- kubelet   
+
+services:
+- docker
+- kubelet
+
+token_file: join_token
+admin_config_file: kubeconfig
