@@ -87,7 +87,7 @@ resource "aws_security_group_rule" "sgr_master" {
 
 resource "aws_instance" "k8s-master" {
   ami             = "ami-04b9e92b5572fa0d1"
-  instance_type   = "t2.micro"
+  instance_type   = "t3.small"
   security_groups = ["${aws_security_group.sg_master.id}"]
   subnet_id       = "${aws_subnet.public.id}"
   key_name        = "k8s"
