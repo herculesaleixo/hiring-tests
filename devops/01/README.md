@@ -22,6 +22,9 @@ Devido a não ter acesso a uma infraestrutura de laboratório AWS, precisei usar
 - Como não consegui seguir com o CI, tentei automatizar a criação da infra e cluster através de apenas 2 scripts em shell
 
 # Instruções de execução do projeto
+Pré-requisitos:
+- Esteja com seu awscli configurado e apontado para a região us-east-1
+
 O projeto se resume a 2 execuções em script e 2 etapas manuais:
 - Script "install_infra.sh" que se encontra no diretório infra/terraform
 - Script "install_k8s.sh" que se encnontra no diretório infra/ansible
