@@ -97,3 +97,14 @@ resource "aws_instance" "k8s-master" {
     Name = "k8s-master"
   }
 }
+
+# ECR for appnode
+
+resource "aws_ecr_repository" "appnode" {
+  name                 = "appnode"
+  image_tag_mutability = "MUTABLE"
+
+  image_scanning_configuration {
+    scan_on_push = true
+  }
+}

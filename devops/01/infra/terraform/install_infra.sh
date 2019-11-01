@@ -24,7 +24,7 @@ variable "public_key" {
 }
 
 variable "sg_ingress_ports" {
-  default = ["22", "6443", "2379", "2380", "10250", "10251", "10252"]
+  default = ["22", "6443", "2379", "2380", "10250", "10251", "10252", "3000"]
 }
 EOF
 
@@ -44,7 +44,7 @@ ansible_ssh_private_key_file=k8s-key
 ansible_user=ubuntu
 
 [master]
-`./terraform output | cut -d' ' -f3`
+`./terraform output | grep k8s-master-publicip | cut -d' ' -f3`
 EOF
 
 rm -rf terraform

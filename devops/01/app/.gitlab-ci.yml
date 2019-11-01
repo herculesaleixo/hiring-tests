@@ -7,7 +7,7 @@ stages:
 build:
   stage: build
   before_script:
-    - if [ -z `command -v docker` ]; then echo install docker on gitlab runner; else docker ps; fi
+    - if [ -z `command -v docker` ]; then echo "install docker on gitlab runner or use an image to build"; else docker ps; fi
   script:
     - docker build -t appnode .
   only:
@@ -16,18 +16,18 @@ build:
 #publish_to_intenal_registry:
 #  stage: publish
 #  before_script:
-#    - docker login ...
+#    - aws ecr get-login --region us-east-1 --no-include-email
 #  script:
-#    - docker tag appnode ../appnode
-#    - docker push ../appnode
+#    - docker tag appnode ${ECR_REPO_URL}/appnode
+#    - docker push ${ECR_REPO_URL}/appnode
 #  only:
 #    - develop
 
 deploy:
   stage: deploy
 #  before_script:
-#    - docker login ...
-#    - docker pull .../appnode
+#    - aws ecr get-login --region us-east-1 --no-include-email
+#    - docker pull ${ECR_REPO_URL}/appnode
   script:
     - helm install appnode
   only:

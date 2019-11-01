@@ -16,7 +16,7 @@ PUBLIC_IP=`tail -1 hosts`
 
 sed -i "s/$LOCAL_IP/$PUBLIC_IP:6443/g" playbooks/kubeconfig
 
-echo "A chave gerada para seu acesso ao server é `pwd/k8s-key`"
+echo "A chave gerada para seu acesso ao server é `pwd`/k8s-key"
 echo "Use o arquivo gerado em `pwd`/playbooks/kubeconfig para acessar o cluster como admin."
 echo "O comando para utilizar esse arquivo como configuração default é: export KUBECONFIG=`pwd`/playbooks/kubeconfig"
 echo "Para desfazer essa configuração use o comando: unset KUBECONFIG"
