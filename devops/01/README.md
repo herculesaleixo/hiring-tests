@@ -7,6 +7,7 @@
 - CI: gitlab-ci configurado no diretório do app
 
 **Cenário e dificuldades**
+
 Devido a não ter acesso a uma infraestrutura de laboratório AWS, precisei usar o free-tier (t2.micro) com 1GB RAM e 1 vCPU. O impacto de ter usado o free-tier me tomou muito tempo e consequentemente acabei não conseguindo concluir o desafio por completo. Abaixo eu listo alguns impactos de ter usado free-tier:
 - O master node do kubernetes exige pelo menos 2 GB de RAM. Com uma opção específica do kubeadm eu consegui passar por essa verificação e instalar o master node em uma t2.micro, porém os serviços básicos para subir o cluster já consomem boa parte da capacidade computacional da instância
 - O tempo gasto com a parte de IAC (dev e testes) acabou impossibilitando a entrega de parte do desafio em tempo ágil e eficiente
