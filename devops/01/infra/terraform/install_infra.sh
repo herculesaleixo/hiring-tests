@@ -32,8 +32,10 @@ ls terraform
 if [ $? -ne 0 ]; then
     wget -O terraform.zip https://releases.hashicorp.com/terraform/0.12.13/terraform_0.12.13_linux_amd64.zip
     unzip terraform.zip -d .
+    rm -rf terraform.zip
 fi
 
+./terraform init
 ./terraform apply -auto-approve
 
 cat > ../ansible/hosts << EOF
@@ -44,3 +46,5 @@ ansible_user=ubuntu
 [master]
 `./terraform output | cut -d' ' -f3`
 EOF
+
+rm -rf terraform
